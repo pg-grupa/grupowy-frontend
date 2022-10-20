@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import MapPreview from "@/components/MapPreview.vue";
-import { reactive } from "vue";
+import type { LatLngExpression } from "leaflet";
 
-const state = reactive({
-  center: [54.372158, 18.638306],
-  zoom: 12,
-});
+function onMove(center: LatLngExpression) {
+  console.log(center);
+}
 </script>
 
 <template>
   <map-preview
     id="map"
-    v-model:center="state.center"
-    v-model:zoom="state.zoom"
+    :center="[54.372158, 18.638306]"
+    :zoom="12"
+    @moveend="onMove"
   />
 </template>
 

@@ -14,8 +14,9 @@ interface State {
 
 const props = defineProps<Props>();
 const emit = defineEmits<{
-  (e: "update:center", value: LatLngExpression): void;
-  (e: "update:zoom", value: Number): void;
+  (e: "move", value: LatLngExpression): void;
+  (e: "moveend", value: LatLngExpression): void;
+  (e: "zoom", value: Number): void;
 }>();
 
 const mapDiv = ref();
@@ -32,10 +33,9 @@ onMounted(() => {
 
   state.map.setView(props.center, props.zoom);
 
-  state.map.on("moveend", () =>
-    emit("update:center", state.map?.getCenter() ?? [0, 0])
-  );
-  state.map.on("zoomend", () => emit("update:zoom", state.map?.getZoom() ?? 0));
+  state.map.on("move", () => emit("move", state.map?.getCenter() ?? [0, 0]));
+  state.map.on("moveend", () => emit("moveend", state.map?.getCenter() ?? [0, 0]));
+  state.map.on("zoom", () => emit("zoom", state.map?.getZoom() ?? 0));
 });
 </script>
 
