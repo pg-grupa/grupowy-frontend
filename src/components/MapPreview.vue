@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
+import "@fortawesome/fontawesome-free/css/solid.min.css";
 import "leaflet/dist/leaflet.css";
-import leaflet, { LatLngExpression, Map as LeafletMap } from "leaflet";
+import L, { LatLngExpression, Map as LeafletMap } from "leaflet";
+import "leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css";
+import "leaflet-extra-markers";
 import { onMounted, ref } from "vue";
+import { store } from "@/state/store";
 
 interface Props {
   center: LatLngExpression;
@@ -17,14 +22,24 @@ const emit = defineEmits<{
 
 const mapDiv = ref();
 
-let map: LeafletMap | null;
+let map: LeafletMap | undefined;
 
 onMounted(() => {
-  map = leaflet.map(mapDiv.value);
+  map = L.map(mapDiv.value);
 
   map.addLayer(
-    leaflet.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
   );
+
+  store.placeMarkers.forEach((placeMarker) => {
+    const icon = new L.ExtraMarkers.Icon({
+      icon: `fa-${placeMarker.icon}`,
+      markerColor: "cyan",
+      prefix: "fa",
+    });
+
+    map!.addLayer(L.marker([placeMarker.lat, placeMarker.lng], { icon: icon }));
+  });
 
   map.setView(props.center, props.zoom);
 
