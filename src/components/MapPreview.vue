@@ -33,12 +33,18 @@ onMounted(() => {
 
   store.placeMarkers.forEach((placeMarker) => {
     const icon = new L.ExtraMarkers.Icon({
-      icon: `fa-${placeMarker.icon}`,
+      icon: placeMarker.icon,
       markerColor: "cyan",
       prefix: "fa",
     });
 
-    map!.addLayer(L.marker([placeMarker.lat, placeMarker.lng], { icon: icon }));
+    const marker = L.marker([placeMarker.lat, placeMarker.lng], { icon: icon });
+    marker.bindTooltip(placeMarker.name, {
+      offset: [15, -22.5],
+      permanent: true,
+    });
+
+    map!.addLayer(marker);
   });
 
   map.setView(props.center, props.zoom);
