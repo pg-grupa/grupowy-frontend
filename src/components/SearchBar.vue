@@ -44,10 +44,8 @@ function onSearch() {
   top: 0;
   left: 0;
   width: 100%;
-  max-width: 600px;
   z-index: 1000;
-  padding: 1rem;
-  padding-left: 60px;
+  padding: 50px 50px 0;
 }
 
 form {
@@ -57,29 +55,36 @@ form {
 }
 
 form > * {
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 input {
   width: 100%;
+  max-width: 500px;
+  height: 50px;
   border: none;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  font-size: 1.2rem;
+  padding-left: 20px;
+  border-radius: 15px;
+  font-size: 1.4rem;
+  line-height: 50px;
+  background-color: #ffffff;
   box-shadow: var(--defaul-shadow);
 }
 
 button {
+  flex-shrink: 0;
+  height: 50px;
+  width: 50px;
   border: none;
-  padding: 0.5rem 0.6rem;
   border-radius: 9999px;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
+  line-height: 50px;
   background-color: #ffffff;
   box-shadow: var(--defaul-shadow);
 }
 
 button.toggled {
-  background-color: rgb(39, 39, 39);
+  background-color: rgba(58, 58, 58, 1);
   color: #ffffff;
 }
 </style>
