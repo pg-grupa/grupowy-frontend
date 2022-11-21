@@ -8,8 +8,8 @@ function onMove(center: LatLngExpression) {
 }
 </script>
 
-<template  plate>
-  <search-bar/>
+<template plate>
+  <search-bar />
   <map-preview
     id="map"
     :center="[54.372158, 18.638306]"

@@ -20,6 +20,9 @@ function onSearch() {
         autocomplete="off"
         spellcheck="false"
       />
+      <button id="submitButton" type="submit">
+        <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+      </button>
       <button
         type="button"
         :class="{ toggled: showFilters }"
@@ -63,12 +66,12 @@ input {
   max-width: 500px;
   height: 50px;
   border: none;
-  padding-left: 20px;
+  padding-left: 50px;
   border-radius: 15px;
   font-size: 1.4rem;
   line-height: 50px;
   background-color: #ffffff;
-  box-shadow: var(--defaul-shadow);
+  box-shadow: var(--default-shadow);
 }
 
 button {
@@ -80,11 +83,19 @@ button {
   font-size: 1.6rem;
   line-height: 50px;
   background-color: #ffffff;
-  box-shadow: var(--defaul-shadow);
+  box-shadow: var(--default-shadow);
 }
 
 button.toggled {
   background-color: rgba(58, 58, 58, 1);
   color: #ffffff;
+}
+
+#submitButton {
+  position: absolute;
+  left: 0;
+  background: transparent;
+  box-shadow: none;
+  color: rgba(58, 58, 58, 1);
 }
 </style>
