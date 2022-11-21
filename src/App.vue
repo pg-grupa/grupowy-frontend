@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import MapPreview from "@/components/MapPreview.vue";
+import SearchBar from "@/components/SearchBar.vue";
 import type { LatLngExpression } from "leaflet";
 
 function onMove(center: LatLngExpression) {
@@ -7,7 +8,8 @@ function onMove(center: LatLngExpression) {
 }
 </script>
 
-<template>
+<template  plate>
+  <search-bar/>
   <map-preview
     id="map"
     :center="[54.372158, 18.638306]"
