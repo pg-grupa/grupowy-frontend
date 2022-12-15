@@ -25,7 +25,7 @@ const mapDiv = ref();
 let map: LeafletMap | undefined;
 
 onMounted(() => {
-  map = L.map(mapDiv.value,{ zoomControl:false });
+  map = L.map(mapDiv.value, { zoomControl: false });
 
   map.addLayer(
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
