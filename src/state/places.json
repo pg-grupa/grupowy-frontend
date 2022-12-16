@@ -198,5 +198,310 @@
     "phone": "",
     "openHours": [],
     "services": []
+  },
+  {
+    "placeId": 13,
+    "placeTypeId": 8,
+    "name": "Cafe Antidotum",
+    "lat": 54.372180,
+    "lng": 18.616337,
+    "addressStreet": "Pilotów 3/32",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-460",
+    "ownerName": "",
+    "phone": "798963414",
+    "openHours": [
+      {
+        "day": "Poniedziałek",
+        "openHour": "9:00",
+        "closeHour": "20:00"
+      },
+      {
+        "day": "Wtorek",
+        "openHour": "9:00",
+        "closeHour": "20:00"
+      },
+      {
+        "day": "Środa",
+        "openHour": "9:00",
+        "closeHour": "20:00"
+      },
+      {
+        "day": "Czwartek",
+        "openHour": "9:00",
+        "closeHour": "20:00"
+      },
+      {
+        "day": "Piątek",
+        "openHour": "9:00",
+        "closeHour": "20:00"
+      }
+    ],
+    "services": [
+      {
+        "name": "Szakszuka",
+        "price": "27 zł"
+      },
+      {
+        "name": "Tosty Francuskie",
+        "price": "31 zł"
+      },
+      {
+        "name": "Caffe Latte",
+        "price": "11 zł"
+      }
+    ]
+  },
+  {
+    "placeId": 14,
+    "placeTypeId": 5,
+    "name": "CK Bowling",
+    "lat": 54.312668,
+    "lng": 18.566727,
+    "addressStreet": "Staropolska 32",
+    "addressCity": "Kowale",
+    "addressPostalCode": "80-180",
+    "ownerName": "",
+    "phone": "583004010",
+    "openHours": [
+      {
+        "day": "Poniedziałek",
+        "openHour": "13:00",
+        "closeHour": "22:00"
+      },
+      {
+        "day": "Wtorek",
+        "openHour": "11:00",
+        "closeHour": "00:00"
+      },
+      {
+        "day": "Środa",
+        "openHour": "11:00",
+        "closeHour": "00:00"
+      },
+      {
+        "day": "Czwartek",
+        "openHour": "11:00",
+        "closeHour": "22:00"
+      },
+      {
+        "day": "Piątek",
+        "openHour": "11:00",
+        "closeHour": "22:00"
+      }
+    ],
+    "services": [
+      {
+        "name": "Tor 1 godzina",
+        "price": "54 zł"
+      },
+      {
+        "name": "Wynajem butów",
+        "price": "10 zł"
+      },
+      {
+        "name": "Coca Cola",
+        "price": "11 zł"
+      }
+    ]
+  },
+  { 
+    "placeId": 15,
+    "placeTypeId": 1,
+    "name": "Biblioteka Główna",
+    "lat": 54.352030,
+    "lng": 18.643957,
+    "addressStreet": "Targ Rakowy 5",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-806",
+    "ownerName": "",
+    "phone": "583014811",
+    "openHours": [
+      {
+        "day": "Poniedziałek",
+        "openHour": "9:00",
+        "closeHour": "19:00"
+      },
+      {
+        "day": "Wtorek",
+        "openHour": "9:00",
+        "closeHour": "19:00"
+      },
+      {
+        "day": "Środa",
+        "openHour": "9:00",
+        "closeHour": "19:00"
+      },
+      {
+        "day": "Czwartek",
+        "openHour": "9:00",
+        "closeHour": "19:00"
+      },
+      {
+        "day": "Piątek",
+        "openHour": "9:00",
+        "closeHour": "19:00"
+      }
+    ]
+  },
+  {
+    "placeId": 16,
+    "placeTypeId": 2,
+    "name": "Laser Wars",
+    "lat": 54.383838,
+    "lng": 18.605337,
+    "addressStreet": "Targ Rakowy 5",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-806",
+    "ownerName": "",
+    "phone": "583014811",
+    "openHours": [
+      {
+        "day": "Poniedziałek",
+        "openHour": "9:00",
+        "closeHour": "18:00"
+      },
+      {
+        "day": "Wtorek",
+        "openHour": "9:00",
+        "closeHour": "18:00"
+      },
+      {
+        "day": "Środa",
+        "openHour": "9:00",
+        "closeHour": "18:00"
+      },
+      {
+        "day": "Czwartek",
+        "openHour": "9:00",
+        "closeHour": "18:00"
+      },
+      {
+        "day": "Piątek",
+        "openHour": "9:00",
+        "closeHour": "18:00"
+      }
+    ],
+    "services": []
+  },
+  {
+    "placeId": 17,
+    "placeTypeId": 8,
+    "name": "Circle K",
+    "lat": 54.425261,
+    "lng": 18.563461,
+    "addressStreet": "Malarzy 86B",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-864",
+    "ownerName": "",
+    "phone": "",
+    "openHours": [],
+    "services": []
+  },
+  {
+    "placeId": 18,
+    "placeTypeId": 5,
+    "name": "Unique Club Sopot",
+    "lat": 54.446729,
+    "lng": 18.569399,
+    "addressStreet": "Plac Zdrojowy 1",
+    "addressCity": "Sopot",
+    "addressPostalCode": "80-720",
+    "ownerName": "",
+    "phone": "500401623",
+    "openHours": [],
+    "services": []
+  },
+  {
+    "placeId": 19,
+    "placeTypeId": 4,
+    "name": "Stacja BP",
+    "lat": 54.266478,
+    "lng": 18.655574,
+    "addressStreet": "Jana Kasprowicza 1",
+    "addressCity": "Pruszcz Gdański",
+    "addressPostalCode": "83-000",
+    "ownerName": "",
+    "phone": "603336398",
+    "openHours": [],
+    "services": []
+  },
+  {
+    "placeId": 20,
+    "placeTypeId": 3,
+    "name": "Tawerna Boma", 
+    "lat": 54.411101,
+    "lng": 18.629872,
+    "addressStreet": "Brzeźnieńska 17",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-512",
+    "ownerName": "Daniel Bom",
+    "phone": "881944753",
+    "openHours": [
+      {
+        "day": "Poniedziałek",
+        "openHour": "9:00",
+        "closeHour": "22:00"
+      },
+      {
+        "day": "Wtorek",
+        "openHour": "9:00",
+        "closeHour": "22:00"
+      },
+      {
+        "day": "Środa",
+        "openHour": "9:00",
+        "closeHour": "22:00"
+      },
+      {
+        "day": "Czwartek",
+        "openHour": "9:00",
+        "closeHour": "22:00"
+      },
+      {
+        "day": "Piątek",
+        "openHour": "9:00",
+        "closeHour": "22:00"
+      },
+      {
+        "day": "Sobota",
+        "openHour": "9:00",
+        "closeHour": "22:00"
+      },
+      {
+        "day": "Niedziela",
+        "openHour": "9:00",
+        "closeHour": "23:00"
+      }
+    ]
+  },
+  {
+    "placeId": 21,
+    "placeTypeId": 4,
+    "name": "McGraver serwis ekspresów",
+    "lat": 54.432861, 
+    "lng": 18.462375,
+    "addressStreet": "Parterowa 1A",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "83-299",
+    "ownerName": "",
+    "phone": "533324891",
+    "openHours": [],
+    "services": []
+  },
+  {
+    "placeId": 22,
+    "placeTypeId": 3,
+    "name": "Kebab Jerusalem",
+    "lat": 54.348013, 
+    "lng": 18.365176,
+    "addressStreet": "Gdyńska 39",
+    "addressCity": "Żukowo",
+    "addressPostalCode": "83-330",
+    "ownerName": "",
+    "phone": "533324891",
+    "openHours": [],
+    "services": []
   }
+
 ]
