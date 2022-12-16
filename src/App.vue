@@ -1,6 +1,11 @@
 <script>
 import MapPreview from "@/components/MapPreview.vue";
+
 import LRoutingMachine from "@/components/LRoutingMachine.vue";
+
+import SearchBar from "@/components/SearchBar.vue";
+import MapView from "@/components/MapView.vue";
+
 import type { LatLngExpression } from "leaflet";
 import { onMounted } from "vue";
 
@@ -9,15 +14,10 @@ function onMove(center: LatLngExpression) {
 }
 </script>
 <template>
-  <div>
-    <map-preview
-      id="map"
-      :center="[54.372158, 18.638306]"
-      :zoom="12"
-      @moveend="onMove"
-    />
-    <LRoutingMachine/>
-  </div>
+
+  <search-bar />
+  <map-view id="map" />
+
 </template>
 
 <script>
