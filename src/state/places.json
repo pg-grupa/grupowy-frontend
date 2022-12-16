@@ -1,0 +1,202 @@
+[
+  {
+    "placeId": 1,
+    "placeTypeId": 3,
+    "name": "Złota Karczma",
+    "lat": 54.352024,
+    "lng": 18.646639,
+    "addressStreet": "",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "12-345",
+    "ownerName": "Jan Kowalski",
+    "phone": "123-345-567",
+    "openHours": [
+      {
+        "day": "Poniedziałek",
+        "openHour": "10:00",
+        "closeHour": "18:00"
+      },
+      {
+        "day": "Wtorek",
+        "openHour": "10:00",
+        "closeHour": "18:00"
+      }
+    ],
+    "services": [
+      {
+        "name": "Lunch",
+        "price": "20,50zł"
+      }
+    ]
+  },
+  {
+    "placeId": 2,
+    "placeTypeId": 4,
+    "name": "Warsztat Franka",
+    "lat": 54.372324,
+    "lng": 18.646649,
+    "addressStreet": "",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "12-345",
+    "ownerName": "",
+    "phone": "",
+    "openHours": [],
+    "services": []
+  },
+  {
+    "placeId": 3,
+    "placeTypeId": 8,
+    "name": "Łyk Kawy",
+    "lat": 54.381248,
+    "lng": 18.599570,
+    "addressStreet": "Aleja Grunwaldzka 140",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-264",
+    "ownerName": "Janina Kowalska",
+    "phone": "123-344-444",
+    "openHours": [
+      {
+        "day": "Poniedziałek",
+        "openHour": "10:00",
+        "closeHour": "18:00"
+      },
+      {
+        "day": "Wtorek",
+        "openHour": "10:00",
+        "closeHour": "18:00"
+      }
+    ],
+    "services": [
+      {
+        "name": "Black Coffee",
+        "price": "5,50zł"
+      }
+    ]
+  },
+  {
+    "placeId": 4,
+    "placeTypeId": 8,
+    "name": "Struśkawka",
+    "lat": 54.381245,
+    "lng": 18.590499,
+    "addressStreet": "Juliusza Słowackiego 19/1",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-257",
+    "ownerName": "",
+    "phone": "",
+    "openHours": [],
+    "services": []
+  },
+  {
+    "placeId": 5,
+    "placeTypeId": 8,
+    "name": "Coffee Moose",
+    "lat": 54.379461,
+    "lng": 18.603317,
+    "addressStreet": "Aleja Grunwaldzka 116",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-244",
+    "ownerName": "",
+    "phone": "",
+    "openHours": [],
+    "services": []
+  },
+  {
+    "placeId": 6,
+    "placeTypeId": 5,
+    "name": "Graciarnia",
+    "lat": 54.379368,
+    "lng": 18.607155,
+    "addressStreet": "Dmowskiego 15",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-243",
+    "ownerName": "",
+    "phone": "",
+    "openHours": [],
+    "services": []
+  },
+  {
+    "placeId": 7,
+    "placeTypeId": 5,
+    "name": "Game Over",
+    "lat": 54.350361,
+    "lng": 18.649542,
+    "addressStreet": "Tkacka 27",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-836",
+    "ownerName": "",
+    "phone": "",
+    "openHours": [],
+    "services": []
+  },
+  {
+    "placeId": 8,
+    "placeTypeId": 5,
+    "name": "Flisak '76",
+    "lat": 54.348738,
+    "lng": 18.654596,
+    "addressStreet": "Chlebnicka 9/10",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-830",
+    "ownerName": "",
+    "phone": "",
+    "openHours": [],
+    "services": []
+  },
+  {
+    "placeId": 9,
+    "placeTypeId": 5,
+    "name": "Pub pod Chmurką",
+    "lat": 54.348618,
+    "lng": 18.655258,
+    "addressStreet": "Chlebnicka 13",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-830",
+    "ownerName": "",
+    "phone": "",
+    "openHours": [],
+    "services": []
+  },
+  {
+    "placeId": 10,
+    "placeTypeId": 4,
+    "name": "Warsztat u Marka",
+    "lat": 54.331426,
+    "lng": 18.548548,
+    "addressStreet": "Stężycka 14b",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-174",
+    "ownerName": "",
+    "phone": "",
+    "openHours": [],
+    "services": []
+  },
+  {
+    "placeId": 11,
+    "placeTypeId": 4,
+    "name": "Go Service Polska",
+    "lat": 54.364423,
+    "lng": 18.644004,
+    "addressStreet": "Malarzy 86B",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-864",
+    "ownerName": "",
+    "phone": "",
+    "openHours": [],
+    "services": []
+  },
+  {
+    "placeId": 12,
+    "placeTypeId": 4,
+    "name": "Auto Jędrek Warsztat Samochodowy",
+    "lat": 54.371150,
+    "lng": 18.610807,
+    "addressStreet": "Do Studzienki 28",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "80-227",
+    "ownerName": "",
+    "phone": "",
+    "openHours": [],
+    "services": []
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "placeTypeId": 1,
+    "name": "Księgarnia",
+    "icon": "fa-book-bookmark",
+    "selected": false
+  },
+  {
+    "placeTypeId": 2,
+    "name": "Kwiaciarnia",
+    "icon": "fa-fan",
+    "selected": false
+  },
+  {
+    "placeTypeId": 3,
+    "name": "Restauracja",
+    "icon": "fa-utensils",
+    "selected": false
+  },
+  {
+    "placeTypeId": 4,
+    "name": "Warsztat",
+    "icon": "fa-wrench",
+    "selected": false
+  },
+  {
+    "placeTypeId": 5,
+    "name": "Bar",
+    "icon": "fa-martini-glass-citrus",
+    "selected": false
+  },
+  {
+    "placeTypeId": 8,
+    "name": "Kawiarnia",
+    "icon": "fa-mug-hot",
+    "selected": false
+  }
+]
