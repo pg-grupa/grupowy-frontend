@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { store, populate } from "@/state/store";
+import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
+import "@fortawesome/fontawesome-free/css/solid.min.css";
+import "leaflet/dist/leaflet.css";
+import "leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css";
+import "leaflet-extra-markers";
 import { onMounted, ref } from "vue";
-import * as MapService from "@/services/map-service";
+import { mapService } from "@/services/MapService";
 
 const mapContainer = ref();
 
 onMounted(() => {
-  populate();
-  MapService.initMap(mapContainer, [54.372158, 18.638306], 12);
-  MapService.addMarkersDict(store.places);
+  mapService.initMap(mapContainer);
 });
 </script>
 <template>

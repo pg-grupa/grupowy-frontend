@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { store } from "@/state/store";
+import { placeService } from "@/services/PlaceService";
 
-function selectType(key: number) {
+function selectType(placeTypeId: number) {
   // toggle selection of place type
-  store.placeTypes[key].selected = !store.placeTypes[key].selected;
+  placeService.toggleTypeSelection(placeTypeId);
 }
 </script>
 
@@ -12,7 +12,7 @@ function selectType(key: number) {
     <h2><font-awesome-icon icon="fa-solid fa-filter" /><span>Filtry</span></h2>
     <hr />
     <div class="place-types">
-      <template v-for="placeType in store.placeTypes" :key="placeType">
+      <template v-for="placeType in placeService.getTypes()" :key="placeType">
         <a
           class="type-container"
           :class="{ selected: placeType.selected }"

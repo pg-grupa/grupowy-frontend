@@ -48,7 +48,7 @@
     "placeTypeId": 8,
     "name": "Łyk Kawy",
     "lat": 54.381248,
-    "lng": 18.599570,
+    "lng": 18.59957,
     "addressStreet": "Aleja Grunwaldzka 140",
     "addressCity": "Gdańsk",
     "addressPostalCode": "80-264",
@@ -189,7 +189,7 @@
     "placeId": 12,
     "placeTypeId": 4,
     "name": "Auto Jędrek Warsztat Samochodowy",
-    "lat": 54.371150,
+    "lat": 54.37115,
     "lng": 18.610807,
     "addressStreet": "Do Studzienki 28",
     "addressCity": "Gdańsk",
@@ -203,7 +203,7 @@
     "placeId": 13,
     "placeTypeId": 8,
     "name": "Cafe Antidotum",
-    "lat": 54.372180,
+    "lat": 54.37218,
     "lng": 18.616337,
     "addressStreet": "Pilotów 3/32",
     "addressCity": "Gdańsk",
@@ -305,11 +305,11 @@
       }
     ]
   },
-  { 
+  {
     "placeId": 15,
     "placeTypeId": 1,
     "name": "Biblioteka Główna",
-    "lat": 54.352030,
+    "lat": 54.35203,
     "lng": 18.643957,
     "addressStreet": "Targ Rakowy 5",
     "addressCity": "Gdańsk",
@@ -342,7 +342,8 @@
         "openHour": "9:00",
         "closeHour": "19:00"
       }
-    ]
+    ],
+    "services": []
   },
   {
     "placeId": 16,
@@ -429,7 +430,7 @@
   {
     "placeId": 20,
     "placeTypeId": 3,
-    "name": "Tawerna Boma", 
+    "name": "Tawerna Boma",
     "lat": 54.411101,
     "lng": 18.629872,
     "addressStreet": "Brzeźnieńska 17",
@@ -473,13 +474,14 @@
         "openHour": "9:00",
         "closeHour": "23:00"
       }
-    ]
+    ],
+    "services": []
   },
   {
     "placeId": 21,
     "placeTypeId": 4,
     "name": "McGraver serwis ekspresów",
-    "lat": 54.432861, 
+    "lat": 54.432861,
     "lng": 18.462375,
     "addressStreet": "Parterowa 1A",
     "addressCity": "Gdańsk",
@@ -493,7 +495,7 @@
     "placeId": 22,
     "placeTypeId": 3,
     "name": "Kebab Jerusalem",
-    "lat": 54.348013, 
+    "lat": 54.348013,
     "lng": 18.365176,
     "addressStreet": "Gdyńska 39",
     "addressCity": "Żukowo",
@@ -503,5 +505,4 @@
     "openHours": [],
     "services": []
   }
-
 ]
