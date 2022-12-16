@@ -12,13 +12,13 @@ function selectType(key: number) {
     <h2><font-awesome-icon icon="fa-solid fa-filter" /><span>Filtry</span></h2>
     <hr />
     <div class="place-types">
-      <template v-for="(placeType, key) in store.placeTypes" :key="key">
+      <template v-for="placeType in store.placeTypes" :key="placeType">
         <a
           class="type-container"
           :class="{ selected: placeType.selected }"
-          @click="selectType(key)"
+          @click="selectType(placeType.placeTypeId)"
         >
-          <font-awesome-icon :icon="placeType.icon" />
+          <font-awesome-icon :icon="'fa-solid ' + placeType.icon" />
           <h3 class="type-name">{{ placeType.name }}</h3>
         </a>
       </template>

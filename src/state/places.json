@@ -1,0 +1,46 @@
+[
+  {
+    "placeId": 1,
+    "placeTypeId": 3,
+    "name": "Złota Karczma",
+    "lat": 54.352024,
+    "lng": 18.646639,
+    "addressStreet": "",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "12-345",
+    "ownerName": "Jan Kowalski",
+    "phone": "123-345-567",
+    "openHours": [
+      {
+        "day": "Poniedziałek",
+        "openHour": "10:00",
+        "closeHour": "18:00"
+      },
+      {
+        "day": "Wtorek",
+        "openHour": "10:00",
+        "closeHour": "18:00"
+      }
+    ],
+    "services": [
+      {
+        "name": "Lunch",
+        "price": "20,50zł"
+      }
+    ]
+  },
+  {
+    "placeId": 2,
+    "placeTypeId": 4,
+    "name": "Warsztat Franka",
+    "lat": 54.372324,
+    "lng": 18.646649,
+    "addressStreet": "",
+    "addressCity": "Gdańsk",
+    "addressPostalCode": "12-345",
+    "ownerName": "",
+    "phone": "",
+    "openHours": [],
+    "services": []
+  }
+]

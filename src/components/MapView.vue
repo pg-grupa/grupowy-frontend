@@ -1,13 +1,14 @@
 <script setup lang="ts">
+import { store, populate } from "@/state/store";
 import { onMounted, ref } from "vue";
-import * as MapService from "@/state/map-service";
-import { store } from "@/state/store";
+import * as MapService from "@/services/map-service";
 
 const mapContainer = ref();
 
 onMounted(() => {
+  populate();
   MapService.initMap(mapContainer, [54.372158, 18.638306], 12);
-  MapService.addMarkers(store.placeMarkers);
+  MapService.addMarkersDict(store.places);
 });
 </script>
 <template>

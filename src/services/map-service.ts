@@ -2,7 +2,8 @@ import type { Map, LayerGroup } from "leaflet";
 import L from "leaflet";
 import { reactive } from "vue";
 import type { Ref } from "vue";
-import type { PlaceMarker } from "@/models/PlaceMarker";
+import type { Place } from "@/models/Place";
+import { store } from "@/state/store";
 
 interface MapState {
   map: Map | undefined;
@@ -39,18 +40,19 @@ export const clearMarkers = () => {
   mapState.marksGroup?.clearLayers();
 };
 
-export const addMarkers = (placeMarkers: PlaceMarker[]) => {
-  placeMarkers.forEach((placeMarker) => {
+export const addMarkers = (places: Place[]) => {
+  places.forEach((place) => {
     // create icon for marker
+    const iconName = store.placeTypes[place.placeTypeId].icon;
     const icon = new L.ExtraMarkers.Icon({
-      icon: placeMarker.icon,
+      icon: iconName,
       markerColor: "cyan",
       prefix: "fa",
     });
 
     // create marker
-    const marker = L.marker([placeMarker.lat, placeMarker.lng], { icon: icon });
-    marker.bindTooltip(placeMarker.name, {
+    const marker = L.marker([place.lat, place.lng], { icon: icon });
+    marker.bindTooltip(place.name, {
       offset: [15, -22.5],
       permanent: true,
     });
@@ -58,6 +60,29 @@ export const addMarkers = (placeMarkers: PlaceMarker[]) => {
     // add marker to LayerGroup
     mapState.marksGroup?.addLayer(marker);
   });
+};
+
+export const addMarkersDict = (places: { [key: number]: Place }) => {
+  for (const key in places) {
+    const place = store.places[key];
+    // create icon for marker
+    const iconName = store.placeTypes[place.placeTypeId].icon;
+    const icon = new L.ExtraMarkers.Icon({
+      icon: iconName,
+      markerColor: "cyan",
+      prefix: "fa",
+    });
+
+    // create marker
+    const marker = L.marker([place.lat, place.lng], { icon: icon });
+    marker.bindTooltip(place.name, {
+      offset: [15, -22.5],
+      permanent: true,
+    });
+
+    // add marker to LayerGroup
+    mapState.marksGroup?.addLayer(marker);
+  }
 };
 
 export const setView = (center: [number, number], zoom: number) => {
