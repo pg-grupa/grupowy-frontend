@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import { store } from "@/state/store";
+import { Mode, store } from "@/state/store";
 import { placeService } from "@/services/PlaceService";
+import { mapService } from "@/services/MapService";
 import ReportBox from "./ReportBox.vue";
 import { ref } from "vue";
 
 function onCloseButton(): void {
+  if (store.appMode == Mode.Navigation) {
+    mapService.stopNavigation();
+    store.appMode = Mode.Info;
+  }
   placeService.clearSelection();
 }
 
@@ -12,6 +17,15 @@ const showReportBox = ref(false);
 
 function toggleReportBox(): void {
   showReportBox.value = !showReportBox.value;
+}
+
+function navigate() {
+  const stop: [number, number] = [
+    store.selectedPlace!.lat,
+    store.selectedPlace!.lng,
+  ];
+  // mapService.startRoute([54.352024, 18.646639], stop);
+  mapService.startFromGeoLocation(stop);
 }
 </script>
 
@@ -22,7 +36,9 @@ function toggleReportBox(): void {
     </a>
     <h1>{{ store.selectedPlace!.name }}</h1>
     <div class="place-options">
-      <button><font-awesome-icon icon="fa-solid fa-route" />Nawiguj</button>
+      <button @click="navigate()">
+        <font-awesome-icon icon="fa-solid fa-route" />Nawiguj
+      </button>
       <button @click="toggleReportBox()">
         <font-awesome-icon icon="fa-solid fa-triangle-exclamation" />Zgłoś
       </button>
