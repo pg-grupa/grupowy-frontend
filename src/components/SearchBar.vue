@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import AdvancedSearch from "./AdvancedSearch.vue";
 import FiltersBox from "./FiltersBox.vue";
-import { store } from "@/state/store";
+import { store, Mode } from "@/state/store";
 
 const searchQuery = ref("");
 const showAdvancedSearch = ref(false);
@@ -38,22 +38,22 @@ function toggleFilters() {
       </button>
       <button
         type="button"
-        :class="{ toggled: showFilters }"
+        :class="{ toggled: showFilters && store.appMode == Mode.Search }"
         @click="toggleFilters()"
       >
         <font-awesome-icon icon="fa-solid fa-filter" />
       </button>
       <button
         type="button"
-        :class="{ toggled: showAdvancedSearch && !store.hideSearchInterface }"
+        :class="{ toggled: showAdvancedSearch && store.appMode == Mode.Search }"
         @click="toggleAdvancedSearch()"
       >
         <font-awesome-icon icon="fa-solid fa-magnifying-glass-location" />
       </button>
     </form>
   </div>
-  <advanced-search v-if="showAdvancedSearch && !store.hideSearchInterface" />
-  <filters-box v-if="showFilters && !store.hideSearchInterface" />
+  <advanced-search v-if="showAdvancedSearch && store.appMode == Mode.Search" />
+  <filters-box v-if="showFilters && store.appMode == Mode.Search" />
 </template>
 
 <style scoped>
@@ -62,6 +62,7 @@ function toggleFilters() {
   top: 0;
   left: 0;
   width: 100%;
+  max-width: 800px;
   z-index: 1000;
   padding: 50px 50px 0;
 }

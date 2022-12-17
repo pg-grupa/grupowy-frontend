@@ -20,6 +20,9 @@ import {
   faMugHot,
   faMapLocation,
   faRuler,
+  faX,
+  faRoute,
+  faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
@@ -34,7 +37,10 @@ library.add(
   faWrench,
   faMugHot,
   faMapLocation,
-  faRuler
+  faRuler,
+  faX,
+  faRoute,
+  faTriangleExclamation
 );
 import "./assets/main.css";
 

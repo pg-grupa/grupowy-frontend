@@ -52,6 +52,8 @@ export const mapService: MapService = reactive({
   addMarkers(places) {
     places.forEach((place) => {
       // create icon for marker
+      // TODO: create icons for per type (not per marker) and reuse them
+      // TODO: make 2 sets for selected and unselected markers
       const iconName = placeService.getTypeById(place.placeTypeId).icon;
       const icon = new L.ExtraMarkers.Icon({
         icon: iconName,
@@ -63,6 +65,7 @@ export const mapService: MapService = reactive({
       const marker = L.marker([place.lat, place.lng], { icon: icon }).on(
         "click",
         () => {
+          // TODO: change marker icon on selection
           placeService.selectPlace(place);
         }
       );

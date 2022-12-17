@@ -5,7 +5,7 @@ import L from "leaflet";
 
 import places from "./places.json";
 import placeTypes from "./placeTypes.json";
-import { store } from "@/state/store";
+import { Mode, store } from "@/state/store";
 
 interface PlaceService {
   populated: boolean;
@@ -30,6 +30,11 @@ interface PlaceService {
   toggleTypeSelection(placeTypeId: number): void;
 
   selectPlace(place: Place): void;
+  clearSelection(): void;
+
+  showPlaceInfo(): void;
+
+  hidePlaceInfo(): void;
 }
 
 export const placeService: PlaceService = reactive({
@@ -81,7 +86,26 @@ export const placeService: PlaceService = reactive({
 
   selectPlace(place) {
     store.selectedPlace = place;
-    store.hideSearchInterface = true;
+    store.selectedPlaceType = this.getTypeById(place.placeTypeId);
+    if (store.appMode == Mode.Search) {
+      store.appMode = Mode.Info;
+    }
+  },
+
+  clearSelection() {
+    store.selectedPlace = null;
+    store.selectedPlaceType = null;
+    if (store.appMode == Mode.Info) this.hidePlaceInfo();
+  },
+
+  showPlaceInfo() {
+    if (store.selectedPlace && store.appMode == Mode.Search) {
+      store.appMode = Mode.Info;
+    }
+  },
+
+  hidePlaceInfo() {
+    if (store.appMode == Mode.Info) store.appMode = Mode.Search;
   },
 } as PlaceService);
 
