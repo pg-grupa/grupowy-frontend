@@ -3,9 +3,10 @@ import type { PlaceType } from "@/models/PlaceType";
 import { reactive } from "vue";
 import L from "leaflet";
 
-import places from "./places.json";
-import placeTypes from "./placeTypes.json";
+import placesJson from "./places.json";
+import placeTypesJson from "./placeTypes.json";
 import { Mode, store } from "@/state/store";
+import { mapService } from "./MapService";
 
 interface PlaceService {
   populated: boolean;
@@ -17,6 +18,8 @@ interface PlaceService {
 
   /** Get place by ID */
   getPlaceById(id: number): Place;
+
+  getPlacesByType(placeType: PlaceType): Place[];
 
   /** Get places in <radius(m)> of  point[lat, lng] */
   getPlacesByRadius(lat: number, lng: number, radius: number): Place[];
@@ -35,6 +38,9 @@ interface PlaceService {
   showPlaceInfo(): void;
 
   hidePlaceInfo(): void;
+
+  getFilteredTypes(): PlaceType[];
+  getFilteredPlaces(): Place[];
 }
 
 export const placeService: PlaceService = reactive({
@@ -52,6 +58,17 @@ export const placeService: PlaceService = reactive({
 
   getPlaceById(id) {
     return this.places[id];
+  },
+
+  getPlacesByType(placeType) {
+    const places: Place[] = [];
+    for (const key in this.places) {
+      const place = this.places[key];
+      if (place.placeTypeId == placeType.placeTypeId) {
+        places.push(place);
+      }
+    }
+    return places;
   },
 
   getPlacesByRadius(lat, lng, radius) {
@@ -82,6 +99,8 @@ export const placeService: PlaceService = reactive({
   toggleTypeSelection(placeTypeId) {
     this.placeTypes[placeTypeId].selected =
       !this.placeTypes[placeTypeId].selected;
+    mapService.clearMarkers();
+    mapService.addMarkers(this.getFilteredPlaces());
   },
 
   selectPlace(place) {
@@ -107,13 +126,33 @@ export const placeService: PlaceService = reactive({
   hidePlaceInfo() {
     if (store.appMode == Mode.Info) store.appMode = Mode.Search;
   },
+
+  getFilteredTypes() {
+    const placeTypes: PlaceType[] = [];
+    for (const placeTypeId in this.placeTypes) {
+      if (this.placeTypes[placeTypeId].selected)
+        placeTypes.push(this.placeTypes[placeTypeId]);
+    }
+    return placeTypes;
+  },
+
+  getFilteredPlaces() {
+    let places: Place[] = [];
+    const placeTypes = this.getFilteredTypes();
+    if (placeTypes.length == 0) return this.getPlaces();
+    placeTypes.forEach((placeType) => {
+      const temp_places = this.getPlacesByType(placeType);
+      places = places.concat(temp_places);
+    });
+    return places;
+  },
 } as PlaceService);
 
 if (!placeService.populated) {
-  places.forEach((place) => {
+  placesJson.forEach((place) => {
     placeService.places[place.placeId] = place;
   });
-  placeTypes.forEach((placeType) => {
+  placeTypesJson.forEach((placeType) => {
     placeService.placeTypes[placeType.placeTypeId] = placeType;
   });
   placeService.populated = true;
