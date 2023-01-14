@@ -1,8 +1,6 @@
 import type { Map, LayerGroup, LatLng } from "leaflet";
 import L from "leaflet";
-import "leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css";
 import "leaflet-extra-markers";
-import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import "leaflet-routing-machine";
 import { reactive } from "vue";
 import type { Ref } from "vue";
