@@ -15,7 +15,7 @@ function onSubmit() {
   <div id="curtain"></div>
   <div id="reportBox">
     <a class="close-button" @click="emit('close')">
-      <font-awesome-icon icon="fa-solid fa-x" />
+      <i class="fa-solid fa-x" />
     </a>
     <h3>
       Zgłoś uwagę do obiektu: <br />
@@ -24,9 +24,7 @@ function onSubmit() {
     <hr />
     <form @submit.prevent="onSubmit()">
       <textarea v-model="msg" placeholder="Treść uwagi" />
-      <button>
-        <font-awesome-icon icon="fa-solid fa-triangle-exclamation" />Zgłoś
-      </button>
+      <button><i class="fa-solid fa-triangle-exclamation" />Zgłoś</button>
     </form>
   </div>
 </template>

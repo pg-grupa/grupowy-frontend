@@ -1,15 +1,11 @@
 <script setup lang="ts">
 // import MapPreview from "@/components/MapPreview.vue";
-import SearchBar from "@/components/SearchBar.vue";
 import MapView from "@/components/MapView.vue";
-import PlaceInfo from "@/components/PlaceInfo.vue";
-import { store } from "./state/store";
+import { Mode, store } from "./state/store";
 </script>
 
 <template>
-  <search-bar />
-  <map-view id="map" />
-  <place-info v-if="store.selectedPlace" />
+  <map-view id="map" v-if="store.appMode != Mode.Loading" />
 </template>
 
 <style scoped>

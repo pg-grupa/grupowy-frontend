@@ -2,16 +2,14 @@ import type { OpenHours } from "./OpenHours";
 import type { Service } from "./Service";
 
 export interface Place {
-  placeId: number;
-  placeTypeId: number;
+  id: number;
+  place_type_id: number;
   name: string;
-  lat: number;
-  lng: number;
-  addressStreet: string;
-  addressCity: string;
-  addressPostalCode: string;
-  ownerName: string;
+  latitude: number;
+  longitude: number;
+  address: string;
+  owner: string;
   phone: string;
-  openHours: OpenHours[];
+  openHours: { [day: string]: OpenHours | null };
   services: Service[];
 }

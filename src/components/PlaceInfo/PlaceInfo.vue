@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { Mode, store } from "@/state/store";
 import { placeService } from "@/services/PlaceService";
-import { mapService } from "@/services/MapService";
 import ReportBox from "./ReportBox.vue";
-import { ref } from "vue";
+import { ref, type Ref } from "vue";
+import { apiService } from "@/services/ApiService";
+import type { Place } from "@/models/Place";
 
 function onCloseButton(): void {
   if (store.appMode == Mode.Navigation) {
-    mapService.stopNavigation();
     store.appMode = Mode.Info;
   }
   placeService.clearSelection();
@@ -21,26 +21,24 @@ function toggleReportBox(): void {
 
 function navigate() {
   const stop: [number, number] = [
-    store.selectedPlace!.lat,
-    store.selectedPlace!.lng,
+    store.selectedPlace!.latitude,
+    store.selectedPlace!.longitude,
   ];
-  // mapService.startRoute([54.352024, 18.646639], stop);
-  mapService.startFromGeoLocation(stop);
 }
 </script>
 
 <template>
   <div id="placeInfo">
     <a class="close-button" @click="onCloseButton()">
-      <font-awesome-icon icon="fa-solid fa-x" />
+      <i class="fa-solid fa-x" />
     </a>
     <h1>{{ store.selectedPlace!.name }}</h1>
     <div class="place-options">
       <button @click="navigate()">
-        <font-awesome-icon icon="fa-solid fa-route" />Nawiguj
+        <i class="fa-solid fa-route" />Nawiguj
       </button>
       <button @click="toggleReportBox()">
-        <font-awesome-icon icon="fa-solid fa-triangle-exclamation" />Zgłoś
+        <i class="fa-solid fa-triangle-exclamation" />Zgłoś
       </button>
     </div>
     <hr />
@@ -50,24 +48,28 @@ function navigate() {
     </div>
     <div class="info-item">
       <h5 class="info-label">Adres</h5>
-      {{ store.selectedPlace!.addressStreet }},
-      {{ store.selectedPlace!.addressPostalCode }}
-      {{ store.selectedPlace!.addressCity }}
+      {{ store.selectedPlace!.address }}
     </div>
     <div class="info-item">
       <h5 class="info-label">Właściciel</h5>
-      {{ store.selectedPlace!.ownerName }}
+      {{ store.selectedPlace!.owner }}
+    </div>
+    <div class="info-item">
+      <h5 class="info-label">Telefon</h5>
+      {{ store.selectedPlace!.phone }}
     </div>
     <div class="info-item">
       <h5 class="info-label">Godziny otwarcia</h5>
       <table>
-        <tr
-          v-for="openHours in store.selectedPlace!.openHours"
-          :key="openHours.day"
+        <template
+          v-for="openHours, day in store.selectedPlace!.openHours"
+          :key="day"
         >
-          <td>{{ openHours.day }}</td>
-          <td>{{ openHours.openHour }} - {{ openHours.closeHour }}</td>
-        </tr>
+          <tr v-if="openHours">
+            <td>{{ day }}</td>
+            <td>{{ openHours.from }} - {{ openHours.to }}</td>
+          </tr>
+        </template>
       </table>
     </div>
     <div class="info-item">

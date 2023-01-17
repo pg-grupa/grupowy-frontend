@@ -5,15 +5,15 @@
     <form @submit.prevent>
       <h4>Szukaj obiekty o wybranym typie na zadanym obszarze</h4>
       <div class="input-group">
-        <font-awesome-icon icon="fa-solid fa-map-location" />
+        <i class="fa-solid fa-map-location" />
         <input type="text" placeholder="Adres początkowy" />
       </div>
       <div class="input-group">
-        <font-awesome-icon icon="fa-solid fa-wrench" />
+        <i class="fa-solid fa-wrench" />
         <input type="text" placeholder="Typ obiektu" />
       </div>
       <div class="input-group">
-        <font-awesome-icon icon="fa-solid fa-ruler" />
+        <i class="fa-solid fa-ruler" />
         <input type="text" placeholder="Zasięg (km)" />
       </div>
     </form>

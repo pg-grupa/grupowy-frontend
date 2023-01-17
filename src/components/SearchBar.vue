@@ -2,24 +2,38 @@
 import { ref } from "vue";
 import AdvancedSearch from "./AdvancedSearch.vue";
 import FiltersBox from "./FiltersBox.vue";
-import { store, Mode } from "@/state/store";
+import { store, Mode, changeMode, exitMode } from "@/state/store";
+import { placeService } from "@/services/PlaceService";
+
+const emit = defineEmits<{
+  (e: "modeChanged"): void;
+  (e: "filterChanged"): void;
+}>();
 
 const searchQuery = ref("");
-const showAdvancedSearch = ref(false);
-const showFilters = ref(false);
 
 function onSearch() {
   console.log(searchQuery.value); // TODO: send search request
 }
 
 function toggleAdvancedSearch() {
-  showFilters.value = false; // hide filters
-  showAdvancedSearch.value = !showAdvancedSearch.value; // toggle advanced search
+  if (store.appMode == Mode.Filter) exitMode();
+  if (store.appMode == Mode.Search) {
+    exitMode();
+  } else {
+    changeMode(Mode.Search);
+  }
+  emit("modeChanged");
 }
 
 function toggleFilters() {
-  showFilters.value = !showFilters.value; // toggle filters
-  showAdvancedSearch.value = false; // hide advanced search
+  if (store.appMode == Mode.Search) exitMode();
+  if (store.appMode == Mode.Filter) {
+    exitMode();
+  } else {
+    changeMode(Mode.Filter);
+  }
+  emit("modeChanged");
 }
 </script>
 
@@ -34,26 +48,29 @@ function toggleFilters() {
         spellcheck="false"
       />
       <button id="submitButton" type="submit">
-        <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+        <i class="fa-solid fa-magnifying-glass" />
       </button>
       <button
         type="button"
-        :class="{ toggled: showFilters && store.appMode == Mode.Search }"
+        :class="{ toggled: store.appMode == Mode.Filter }"
         @click="toggleFilters()"
       >
-        <font-awesome-icon icon="fa-solid fa-filter" />
+        <i class="fa-solid fa-filter" />
       </button>
       <button
         type="button"
-        :class="{ toggled: showAdvancedSearch && store.appMode == Mode.Search }"
+        :class="{ toggled: store.appMode == Mode.Search }"
         @click="toggleAdvancedSearch()"
       >
-        <font-awesome-icon icon="fa-solid fa-magnifying-glass-location" />
+        <i class="fa-solid fa-magnifying-glass-location" />
       </button>
     </form>
   </div>
-  <advanced-search v-if="showAdvancedSearch && store.appMode == Mode.Search" />
-  <filters-box v-if="showFilters && store.appMode == Mode.Search" />
+  <advanced-search v-if="store.appMode == Mode.Search" />
+  <filters-box
+    v-if="store.appMode == Mode.Filter"
+    @filter-changed="emit('filterChanged')"
+  />
 </template>
 
 <style scoped>
