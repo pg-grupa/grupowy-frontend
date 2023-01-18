@@ -102,6 +102,8 @@ function onModeChange() {
       bounds,
       options
     );
+  } else if (store.appMode == Mode.Search) {
+    redrawMarkers();
   }
 }
 

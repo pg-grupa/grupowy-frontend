@@ -44,9 +44,14 @@ function toggleAdvancedSearch() {
   if (store.appMode == Mode.Search) {
     exitMode();
   } else {
+    store.loadedPlaces = [];
     changeMode(Mode.Search);
   }
   emit("modeChanged");
+}
+
+function onChangeView(center: [number, number]) {
+  emit("changeView", center);
 }
 
 function toggleFilters() {
@@ -105,7 +110,11 @@ function toggleFilters() {
       <a class="search-result" @click="showResults = false">Zamknij</a>
     </template>
   </div>
-  <advanced-search v-if="store.appMode == Mode.Search" />
+  <advanced-search
+    v-if="store.appMode == Mode.Search"
+    @change-view="onChangeView"
+    @advanced-filter-changed="emit('filterChanged')"
+  />
   <filters-box
     v-if="store.appMode == Mode.Filter"
     @filter-changed="emit('filterChanged')"
@@ -181,7 +190,7 @@ button.toggled {
   background-color: #ffffff;
   border-radius: 15px;
   box-shadow: var(--default-shadow);
-  z-index: 1000;
+  z-index: 2000;
   padding: 20px 0;
 }
 
