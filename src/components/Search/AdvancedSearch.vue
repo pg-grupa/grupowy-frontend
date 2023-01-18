@@ -4,7 +4,7 @@ import type { SearchResult } from "leaflet-geosearch/dist/providers/provider";
 import { type Ref, ref } from "vue";
 import { store } from "@/state/store";
 import type { Place } from "@/models/Place";
-import { apiService } from "@/services/ApiService";
+import { Api } from "@/services/ApiService";
 import L from "leaflet";
 
 const emit = defineEmits<{
@@ -68,7 +68,7 @@ function onSearch() {
   ) {
     // options.value.searchRadius = options.value.searchRadius * 1000;
     const bounds = new L.LatLngBounds([49, 25], [55, 14]);
-    apiService.getPlacesByBounds(
+    Api.getPlacesByBounds(
       (places) => {
         store.loadedPlaces = places;
         searchResults.value = places;

@@ -5,7 +5,7 @@ import "leaflet-extra-markers";
 import "leaflet-routing-machine";
 import { onMounted, ref } from "vue";
 import { Mode, store, changeMode, exitMode } from "@/state/store";
-import { apiService } from "@/services/ApiService";
+import { Api } from "@/services/ApiService";
 import { placeService } from "@/services/PlaceService";
 import SearchBar from "./Search/SearchBar.vue";
 import PlaceInfo from "./PlaceInfo/PlaceInfo.vue";
@@ -84,7 +84,7 @@ function onModeChange() {
   if (store.appMode == Mode.FreeMove) {
     clearMarkers();
     const bounds = map.getBounds();
-    store.loadedPlaces = apiService.getPlacesByBounds((places) => {
+    Api.getPlacesByBounds((places) => {
       store.loadedPlaces = places;
       drawMarkers();
     }, bounds);
@@ -94,7 +94,7 @@ function onModeChange() {
     const options: { [key: string]: any } = {};
     if (store.selectedFilterType)
       options.serviceType = store.selectedFilterType.id;
-    store.loadedPlaces = apiService.getPlacesByBounds(
+    Api.getPlacesByBounds(
       (places) => {
         store.loadedPlaces = places;
         drawMarkers();
@@ -112,7 +112,7 @@ const onFilterChange = onModeChange;
 function onBoundsChange() {
   if (store.appMode == Mode.FreeMove) {
     const bounds = map.getBounds();
-    store.loadedPlaces = apiService.getPlacesByBounds((places) => {
+    Api.getPlacesByBounds((places) => {
       store.loadedPlaces = places;
       redrawMarkers();
     }, bounds);
@@ -121,7 +121,7 @@ function onBoundsChange() {
     const options: { [key: string]: any } = {};
     if (store.selectedFilterType)
       options.serviceType = store.selectedFilterType.id;
-    store.loadedPlaces = apiService.getPlacesByBounds(
+    Api.getPlacesByBounds(
       (places) => {
         store.loadedPlaces = places;
         redrawMarkers();

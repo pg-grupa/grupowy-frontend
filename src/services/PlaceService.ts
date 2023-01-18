@@ -2,12 +2,12 @@ import type { Place } from "@/models/Place";
 import type { PlaceType } from "@/models/PlaceType";
 import { reactive } from "vue";
 import { Mode, store } from "@/state/store";
-import { apiService } from "./ApiService";
+import { Api } from "./ApiService";
 
 class PlaceService {
   constructor() {
     // store.placeTypes = apiService.getTypes();
-    apiService.getTypes((types: PlaceType[]) => {
+    Api.getTypes((types: PlaceType[]) => {
       store.placeTypes = types;
       store.appMode = Mode.FreeMove;
     });
@@ -19,7 +19,7 @@ class PlaceService {
 
   selectPlace(place: Place) {
     store.selectedPlaceType = this.getTypeById(place.place_type_id)!;
-    apiService.getPlaceById((data) => {
+    Api.getPlaceById((data) => {
       store.selectedPlace = data;
     }, place.id);
     // if (store.appMode == Mode.Search) {

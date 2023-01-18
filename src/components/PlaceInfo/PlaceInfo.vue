@@ -3,8 +3,7 @@ import { Mode, store } from "@/state/store";
 import { placeService } from "@/services/PlaceService";
 import ReportBox from "./ReportBox.vue";
 import { ref, type Ref } from "vue";
-import { apiService } from "@/services/ApiService";
-import type { Place } from "@/models/Place";
+import { Api } from "@/services/ApiService";
 
 function onCloseButton(): void {
   if (store.appMode == Mode.Navigation) {
@@ -25,6 +24,16 @@ function navigate() {
     store.selectedPlace!.longitude,
   ];
 }
+
+const dayNames: { [key: string]: string } = {
+  Monday: "Poniedziałek",
+  Tuesday: "Wtorek",
+  Wednesday: "Środa",
+  Thursday: "Czwartek",
+  Friday: "Piątek",
+  Saturday: "Sobota",
+  Sunday: "Niedziela",
+};
 </script>
 
 <template>
@@ -66,7 +75,7 @@ function navigate() {
           :key="day"
         >
           <tr v-if="openHours">
-            <td>{{ day }}</td>
+            <td>{{ dayNames[day] }}</td>
             <td>{{ openHours.from }} - {{ openHours.to }}</td>
           </tr>
         </template>
