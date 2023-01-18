@@ -2,6 +2,7 @@
 import type { PlaceType } from "@/models/PlaceType";
 import { placeService } from "@/services/PlaceService";
 import { store } from "@/state/store";
+import { onUnmounted } from "vue";
 
 const emit = defineEmits<{
   (e: "filterChanged"): void;
@@ -14,6 +15,10 @@ function selectType(placeType: PlaceType) {
   placeService.toggleTypeSelection(placeType);
   emit("filterChanged");
 }
+
+onUnmounted(() => {
+  store.selectedFilterType = null;
+});
 </script>
 
 <template>

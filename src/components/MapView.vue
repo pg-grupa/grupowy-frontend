@@ -7,7 +7,7 @@ import { onMounted, ref } from "vue";
 import { Mode, store, changeMode, exitMode } from "@/state/store";
 import { apiService } from "@/services/ApiService";
 import { placeService } from "@/services/PlaceService";
-import SearchBar from "./SearchBar.vue";
+import SearchBar from "./Search/SearchBar.vue";
 import PlaceInfo from "./PlaceInfo/PlaceInfo.vue";
 
 const INIT_ZOOM: number = 12;
@@ -130,6 +130,11 @@ function onBoundsChange() {
   }
 }
 
+function changeView(center: [number, number], zoom: number = 17) {
+  map.setView(center, zoom);
+  onBoundsChange();
+}
+
 // const startFromGeoLocation = (stop: [number, number]) => {
 //   navigator.geolocation.getCurrentPosition((position) => {
 //     const start: [number, number] = [
@@ -162,7 +167,11 @@ onMounted(() => {
   <div>
     <!-- <search-bar /> -->
     <div class="map-container" ref="mapContainer"></div>
-    <search-bar @mode-changed="onModeChange" @filter-changed="onFilterChange" />
+    <search-bar
+      @mode-changed="onModeChange"
+      @filter-changed="onFilterChange"
+      @change-view="changeView"
+    />
     <place-info v-if="store.selectedPlace" />
   </div>
 </template>

@@ -1,19 +1,42 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, type Ref } from "vue";
 import AdvancedSearch from "./AdvancedSearch.vue";
 import FiltersBox from "./FiltersBox.vue";
 import { store, Mode, changeMode, exitMode } from "@/state/store";
-import { placeService } from "@/services/PlaceService";
+import { OpenStreetMapProvider } from "leaflet-geosearch";
+import type { SearchResult } from "leaflet-geosearch/dist/providers/provider";
 
 const emit = defineEmits<{
   (e: "modeChanged"): void;
   (e: "filterChanged"): void;
+  (e: "changeView", center: [number, number]): void;
 }>();
 
+const results: Ref<SearchResult[] | null> = ref(null);
+const showResults = ref(false);
 const searchQuery = ref("");
+const provider = new OpenStreetMapProvider({
+  params: {
+    "accept-language": "pl", // render results in Dutch
+    countrycodes: "pl", // limit search results to the Netherlands
+  },
+});
 
 function onSearch() {
-  console.log(searchQuery.value); // TODO: send search request
+  // console.log(searchQuery.value); // TODO: send search request
+  provider
+    .search({ query: searchQuery.value })
+    .then((response) => {
+      results.value = response;
+      showResults.value = true;
+    })
+    .catch(console.error);
+}
+
+function onResultSelected(result: SearchResult) {
+  results.value = null;
+  showResults.value = false;
+  emit("changeView", [result.y, result.x]);
 }
 
 function toggleAdvancedSearch() {
@@ -65,6 +88,22 @@ function toggleFilters() {
         <i class="fa-solid fa-magnifying-glass-location" />
       </button>
     </form>
+  </div>
+  <div id="searchResults" v-if="showResults">
+    <template v-if="results && results.length">
+      <a
+        class="search-result"
+        v-for="result in results"
+        :key="result.label"
+        @click="onResultSelected(result)"
+      >
+        <h4>{{ result.label }}</h4>
+      </a>
+    </template>
+    <template v-else>
+      <h3>Brak wyników.</h3>
+      <a class="search-result" @click="showResults = false">Zamknij</a>
+    </template>
   </div>
   <advanced-search v-if="store.appMode == Mode.Search" />
   <filters-box
@@ -130,5 +169,29 @@ button.toggled {
   background: transparent;
   box-shadow: none;
   color: rgba(58, 58, 58, 1);
+}
+
+#searchResults {
+  position: fixed;
+  width: 500px;
+  left: 50px;
+  top: 150px;
+  max-height: 500px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: var(--default-shadow);
+  z-index: 1000;
+  padding: 20px 0;
+}
+
+.search-result {
+  display: block;
+  cursor: pointer;
+  padding: 5px 20px;
+}
+
+.search-result:hover {
+  background-color: rgb(194, 194, 194);
 }
 </style>
