@@ -52,7 +52,7 @@ function redrawMarkers() {
 function fitToMarkers() {
   if (markersGroup.getLayers().length) {
     fitting = true;
-    map.fitBounds(markersGroup.getBounds(), { paddingTopLeft: [400, 0] });
+    map.fitBounds(markersGroup.getBounds(), { paddingTopLeft: [450, 100] });
     fitting = false;
   }
 }
@@ -175,7 +175,7 @@ onMounted(() => {
 
   markersGroup = L.featureGroup().addTo(map);
 
-  map.on("moveend zoomend", () => {
+  map.on("moveend", () => {
     if (!fitting) {
       onBoundsChange();
     }

@@ -22,6 +22,13 @@ const provider = new OpenStreetMapProvider({
   },
 });
 
+let timeout: number | undefined;
+
+function onSearchChange() {
+  clearTimeout(timeout);
+  timeout = setTimeout(onSearch, 1000);
+}
+
 function onSearch() {
   // console.log(searchQuery.value); // TODO: send search request
   provider
@@ -74,6 +81,7 @@ function toggleFilters() {
         placeholder="Szukaj"
         autocomplete="off"
         spellcheck="false"
+        @input="onSearchChange"
       />
       <button id="submitButton" type="submit">
         <i class="fa-solid fa-magnifying-glass" />

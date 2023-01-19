@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Place } from "@/models/Place";
 import { Api } from "@/services/ApiService";
-import { placeService } from "@/services/PlaceService";
 import { ref } from "vue";
 
 const props = defineProps<{ place: Place }>();

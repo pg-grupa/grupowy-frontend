@@ -19,6 +19,8 @@ const searchQuery = ref("");
 const showResults = ref(false);
 const searchResults: Ref<Place[] | null> = ref(null);
 
+let timeout: number | undefined;
+
 const options: Ref<AdvancedSearchOptions> = ref({
   searchCenterLat: null,
   searchCenterLng: null,
@@ -33,8 +35,12 @@ const provider = new OpenStreetMapProvider({
   },
 });
 
+function onStartChange() {
+  clearTimeout(timeout);
+  timeout = setTimeout(onStartSearch, 1000);
+}
+
 function onStartSearch() {
-  // console.log(searchQuery.value); // TODO: send search request
   provider
     .search({ query: searchQuery.value })
     .then((response) => {
@@ -53,6 +59,7 @@ function onStartResultSelected(result: SearchResult) {
 }
 
 function onSearch() {
+  console.log(options.value);
   if (
     options.value.searchCenterLat &&
     options.value.searchCenterLng &&
@@ -98,16 +105,15 @@ onUnmounted(() => {
   <div id="advancedSearch">
     <h4>Szukaj obiekty o wybranym typie na zadanym obszarze</h4>
 
-    <form @submit.prevent="onStartSearch">
-      <div class="input-group">
-        <i class="fa-solid fa-map-location" />
-        <input
-          type="text"
-          placeholder="Adres początkowy"
-          v-model="searchQuery"
-        />
-      </div>
-    </form>
+    <div class="input-group">
+      <i class="fa-solid fa-map-location" />
+      <input
+        type="text"
+        placeholder="Adres początkowy"
+        v-model="searchQuery"
+        @input="onStartChange"
+      />
+    </div>
     <form @submit.prevent="onSearch">
       <div class="input-group">
         <i class="fa-solid fa-wrench" />
