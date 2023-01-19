@@ -17,8 +17,8 @@ const showResults = ref(false);
 const searchQuery = ref("");
 const provider = new OpenStreetMapProvider({
   params: {
-    "accept-language": "pl", // render results in Dutch
-    countrycodes: "pl", // limit search results to the Netherlands
+    "accept-language": "pl", // render results in Polish
+    countrycodes: "pl", // limit search results to the Poland
   },
 });
 
@@ -30,7 +30,6 @@ function onSearchChange() {
 }
 
 function onSearch() {
-  // console.log(searchQuery.value); // TODO: send search request
   provider
     .search({ query: searchQuery.value })
     .then((response) => {
@@ -192,7 +191,7 @@ button.toggled {
   position: fixed;
   width: 500px;
   left: 50px;
-  top: 150px;
+  top: 120px;
   max-height: 500px;
   overflow-y: auto;
   background-color: #ffffff;
