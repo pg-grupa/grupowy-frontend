@@ -1,17 +1,11 @@
 <script setup lang="ts">
-import MapPreview from "@/components/MapPreview.vue";
-import SearchBar from "@/components/SearchBar.vue";
+// import MapPreview from "@/components/MapPreview.vue";
 import MapView from "@/components/MapView.vue";
-import type { LatLngExpression } from "leaflet";
-
-function onMove(center: LatLngExpression) {
-  console.log(center);
-}
+import { Mode, store } from "./state/store";
 </script>
 
 <template>
-  <search-bar />
-  <map-view id="map" />
+  <map-view id="map" v-if="store.appMode != Mode.Loading" />
 </template>
 
 <style scoped>

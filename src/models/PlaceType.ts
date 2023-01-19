@@ -1,6 +1,5 @@
 export interface PlaceType {
-  typeId: number;
+  id: number;
   name: string;
   icon: string;
-  selected: boolean;
 }

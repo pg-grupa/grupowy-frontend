@@ -1,24 +1,38 @@
 <script setup lang="ts">
+import type { PlaceType } from "@/models/PlaceType";
+import { placeService } from "@/services/PlaceService";
 import { store } from "@/state/store";
+import { onUnmounted } from "vue";
 
-function selectType(key: number) {
+const emit = defineEmits<{
+  (e: "filterChanged"): void;
+}>();
+
+const placeTypes = store.placeTypes;
+
+function selectType(placeType: PlaceType) {
   // toggle selection of place type
-  store.placeTypes[key].selected = !store.placeTypes[key].selected;
+  placeService.toggleTypeSelection(placeType);
+  emit("filterChanged");
 }
+
+onUnmounted(() => {
+  // store.selectedFilterType = null;
+});
 </script>
 
 <template>
   <div id="filtersBox">
-    <h2><font-awesome-icon icon="fa-solid fa-filter" /><span>Filtry</span></h2>
+    <h2><i class="fa-solid fa-filter" /><span>Filtry</span></h2>
     <hr />
     <div class="place-types">
-      <template v-for="(placeType, key) in store.placeTypes" :key="key">
+      <template v-for="placeType in placeTypes" :key="placeType">
         <a
           class="type-container"
-          :class="{ selected: placeType.selected }"
-          @click="selectType(key)"
+          :class="{ selected: store.selectedFilterType === placeType }"
+          @click="selectType(placeType)"
         >
-          <font-awesome-icon :icon="placeType.icon" />
+          <i :class="'fa-solid ' + placeType.icon" />
           <h3 class="type-name">{{ placeType.name }}</h3>
         </a>
       </template>
