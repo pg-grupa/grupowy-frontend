@@ -17,7 +17,7 @@ function selectType(placeType: PlaceType) {
 }
 
 onUnmounted(() => {
-  store.selectedFilterType = null;
+  // store.selectedFilterType = null;
 });
 </script>
 

@@ -2,8 +2,7 @@
 import { Mode, store } from "@/state/store";
 import { placeService } from "@/services/PlaceService";
 import ReportBox from "./ReportBox.vue";
-import { ref, type Ref } from "vue";
-import { Api } from "@/services/ApiService";
+import { ref } from "vue";
 
 function onCloseButton(): void {
   if (store.appMode == Mode.Navigation) {

@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import type { Place } from "@/models/Place";
+import { Api } from "@/services/ApiService";
+import { placeService } from "@/services/PlaceService";
 import { ref } from "vue";
 
-defineProps<{ place: Place }>();
+const props = defineProps<{ place: Place }>();
 const emit = defineEmits<{ (e: "close"): void }>();
 const msg = ref("");
 function onSubmit() {
-  console.log(msg.value);
-  emit("close");
+  if (msg.value.length) {
+    Api.postComment(() => emit("close"), {
+      objectId: props.place.id,
+      comment: msg.value,
+    });
+  }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import L from "leaflet";
+import L, { FeatureGroup } from "leaflet";
 import type { Map, LayerGroup, LatLng, LatLngBounds } from "leaflet";
 import "leaflet-extra-markers";
 import "leaflet-routing-machine";
@@ -14,9 +14,10 @@ const INIT_ZOOM: number = 12;
 const INIT_CENTER: [number, number] = [54.352024, 18.646639];
 
 let map!: Map;
-let markersGroup!: LayerGroup;
+let markersGroup!: FeatureGroup;
 let routingControl: any = null;
 const mapContainer = ref();
+let fitting = false;
 
 function clearMarkers() {
   markersGroup.clearLayers();
@@ -48,12 +49,19 @@ function redrawMarkers() {
   drawMarkers();
 }
 
+function fitToMarkers() {
+  if (markersGroup.getLayers().length) {
+    fitting = true;
+    map.fitBounds(markersGroup.getBounds(), { paddingTopLeft: [400, 0] });
+    fitting = false;
+  }
+}
+
 function startNavigation() {
   const start = store.routeStart;
   const end = store.routeEnd;
   if (start && end) {
     if (routingControl) map.removeControl(routingControl);
-    store.appMode = Mode.Navigation;
     if (map.hasLayer(markersGroup)) map.removeLayer(markersGroup);
     routingControl = L.Routing.control({
       waypoints: [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
@@ -86,7 +94,11 @@ function onModeChange() {
     const bounds = map.getBounds();
     Api.getPlacesByBounds((places) => {
       store.loadedPlaces = places;
-      drawMarkers();
+      if (places.length) {
+        drawMarkers();
+        fitToMarkers();
+        // map.fitBounds(markersGroup.getBounds(), { paddingTopLeft: [400, 0] });
+      }
     }, bounds);
   } else if (store.appMode == Mode.Filter) {
     clearMarkers();
@@ -97,13 +109,18 @@ function onModeChange() {
     Api.getPlacesByBounds(
       (places) => {
         store.loadedPlaces = places;
-        drawMarkers();
+        if (places.length) {
+          drawMarkers();
+          fitToMarkers();
+          // map.fitBounds(markersGroup.getBounds(), { paddingTopLeft: [400, 0] });
+        }
       },
       bounds,
       options
     );
   } else if (store.appMode == Mode.Search) {
     redrawMarkers();
+    fitToMarkers();
   }
 }
 
@@ -156,10 +173,12 @@ onMounted(() => {
   );
   map.setView(INIT_CENTER, INIT_ZOOM);
 
-  markersGroup = L.layerGroup().addTo(map);
+  markersGroup = L.featureGroup().addTo(map);
 
   map.on("moveend zoomend", () => {
-    onBoundsChange();
+    if (!fitting) {
+      onBoundsChange();
+    }
   });
 
   onBoundsChange();

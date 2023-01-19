@@ -59,4 +59,23 @@ export namespace Api {
         console.log(error);
       });
   }
+
+  export function postComment(
+    callback: () => any,
+    data: { objectId: number; comment: string }
+  ) {
+    const config = {
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    };
+    axios
+      .post(API_URL + "comment", data, config)
+      .then((response) => {
+        callback();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }

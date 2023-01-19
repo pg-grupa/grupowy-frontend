@@ -1,6 +1,7 @@
 import { reactive } from "vue";
 import type { Place } from "@/models/Place";
 import type { PlaceType } from "@/models/PlaceType";
+import type AdvancedSearchOptions from "@/interfaces/AdvancedSearchOptions";
 
 export enum Mode {
   Loading,
@@ -22,6 +23,8 @@ interface State {
   routeStart: [number, number] | null;
   routeEnd: [number, number] | null;
   myLocation: [number, number] | null;
+  advancedSearchQuery: string;
+  advancedSearchOptions: AdvancedSearchOptions | null;
 }
 
 export const store: State = reactive({
@@ -35,6 +38,8 @@ export const store: State = reactive({
   routeStart: null,
   routeEnd: null,
   myLocation: null,
+  advancedSearchQuery: "",
+  advancedSearchOptions: null,
 });
 
 export function changeMode(mode: Mode) {

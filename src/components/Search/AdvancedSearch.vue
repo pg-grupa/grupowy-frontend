@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import type { SearchResult } from "leaflet-geosearch/dist/providers/provider";
-import { type Ref, ref } from "vue";
+import { type Ref, ref, onMounted, onUnmounted } from "vue";
 import { store } from "@/state/store";
 import type { Place } from "@/models/Place";
 import { Api } from "@/services/ApiService";
 import L from "leaflet";
+import type AdvancedSearchOptions from "@/interfaces/AdvancedSearchOptions";
 
 const emit = defineEmits<{
   (e: "advancedFilterChanged"): void;
@@ -18,14 +19,7 @@ const searchQuery = ref("");
 const showResults = ref(false);
 const searchResults: Ref<Place[] | null> = ref(null);
 
-interface optionsInterface {
-  searchCenterLat: number | null;
-  searchCenterLng: number | null;
-  searchRadius: number | null;
-  serviceType: number | null;
-}
-
-const options: Ref<optionsInterface> = ref({
+const options: Ref<AdvancedSearchOptions> = ref({
   searchCenterLat: null,
   searchCenterLng: null,
   searchRadius: null,
@@ -84,6 +78,20 @@ function onSearch() {
 function onResultSelected(place: Place) {
   emit("changeView", [place.latitude, place.longitude]);
 }
+
+onMounted(() => {
+  if (store.advancedSearchOptions) {
+    options.value = store.advancedSearchOptions;
+  }
+  if (store.advancedSearchQuery) {
+    searchQuery.value = store.advancedSearchQuery;
+  }
+});
+
+onUnmounted(() => {
+  store.advancedSearchOptions = options.value;
+  store.advancedSearchQuery = searchQuery.value;
+});
 </script>
 
 <template>
