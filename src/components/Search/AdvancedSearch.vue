@@ -59,7 +59,6 @@ function onStartResultSelected(result: SearchResult) {
 }
 
 function onSearch() {
-  console.log(options.value);
   if (
     options.value.searchCenterLat &&
     options.value.searchCenterLng &&
@@ -93,6 +92,8 @@ onMounted(() => {
   if (store.advancedSearchQuery) {
     searchQuery.value = store.advancedSearchQuery;
   }
+
+  onSearch();
 });
 
 onUnmounted(() => {
@@ -103,7 +104,7 @@ onUnmounted(() => {
 
 <template>
   <div id="advancedSearch">
-    <h4>Szukaj obiekty o wybranym typie na zadanym obszarze</h4>
+    <h3>Szukaj obiekty o wybranym typie na zadanym obszarze</h3>
 
     <div class="input-group">
       <i class="fa-solid fa-map-location" />
@@ -146,7 +147,7 @@ onUnmounted(() => {
           @click="onResultSelected(result)"
         >
           <h4>{{ result.name }}</h4>
-          {{ result.address }}
+          <h5>{{ result.address }}</h5>
         </a>
       </template>
       <template v-else>
@@ -187,7 +188,7 @@ onUnmounted(() => {
   padding: 20px;
 }
 
-h4 {
+h3 {
   text-align: center;
   margin-bottom: 20px;
 }
@@ -240,5 +241,23 @@ select {
 
 .search-result:hover {
   background-color: rgb(194, 194, 194);
+}
+
+#searchResults {
+  max-height: calc(100vh - 430px);
+  overflow-y: auto;
+}
+
+#searchResults h4 {
+  margin-bottom: 10px;
+}
+
+#searchResults h5 {
+  color: rgb(110, 110, 110);
+}
+
+#searchResults .search-result {
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(150, 150, 150, 0.5);
 }
 </style>

@@ -2,6 +2,7 @@ import { reactive } from "vue";
 import type { Place } from "@/models/Place";
 import type { PlaceType } from "@/models/PlaceType";
 import type AdvancedSearchOptions from "@/interfaces/AdvancedSearchOptions";
+import type NavPoint from "@/interfaces/NavPoint";
 
 export enum Mode {
   Loading,
@@ -9,6 +10,7 @@ export enum Mode {
   Search,
   Filter,
   Info,
+  NavigationSetup,
   Navigation,
 }
 
@@ -20,8 +22,8 @@ interface State {
   selectedFilterType: PlaceType | null;
   placeTypes: PlaceType[];
   loadedPlaces: Place[];
-  routeStart: [number, number] | null;
-  routeEnd: [number, number] | null;
+  routeStart: NavPoint | null;
+  routeEnd: NavPoint | null;
   myLocation: [number, number] | null;
   advancedSearchQuery: string;
   advancedSearchOptions: AdvancedSearchOptions | null;
@@ -30,6 +32,7 @@ interface State {
 export const store: State = reactive({
   appMode: Mode.Loading,
   appModeStack: [],
+  myLocation: null,
   selectedPlace: null,
   selectedPlaceType: null,
   selectedFilterType: null,
@@ -37,7 +40,6 @@ export const store: State = reactive({
   loadedPlaces: [],
   routeStart: null,
   routeEnd: null,
-  myLocation: null,
   advancedSearchQuery: "",
   advancedSearchOptions: null,
 });

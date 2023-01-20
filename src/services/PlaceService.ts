@@ -21,6 +21,8 @@ class PlaceService {
     store.selectedPlaceType = this.getTypeById(place.place_type_id)!;
     Api.getPlaceById((data) => {
       store.selectedPlace = data;
+      store.selectedPlace.latitude = place.latitude;
+      store.selectedPlace.longitude = place.longitude;
     }, place.id);
     // if (store.appMode == Mode.Search) {
     //   store.appMode = Mode.Info;

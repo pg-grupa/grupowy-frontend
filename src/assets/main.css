@@ -33,3 +33,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.leaflet-control-container .leaflet-routing-container-hide {
+  display: none;
+}
