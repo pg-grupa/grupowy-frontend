@@ -4,10 +4,11 @@ import { placeService } from "@/services/PlaceService";
 import ReportBox from "./ReportBox.vue";
 import { ref } from "vue";
 
+const emit = defineEmits<{
+  (e: "setupNav"): void;
+}>();
+
 function onCloseButton(): void {
-  if (store.appMode == Mode.Navigation) {
-    store.appMode = Mode.Info;
-  }
   placeService.clearSelection();
 }
 
@@ -18,10 +19,12 @@ function toggleReportBox(): void {
 }
 
 function navigate() {
-  const stop: [number, number] = [
-    store.selectedPlace!.latitude,
-    store.selectedPlace!.longitude,
-  ];
+  // console.log(store.selectedPlace);
+  store.routeEnd = {
+    name: store.selectedPlace!.name,
+    location: [store.selectedPlace!.latitude, store.selectedPlace!.longitude],
+  };
+  emit("setupNav");
 }
 
 const dayNames: { [key: string]: string } = {
