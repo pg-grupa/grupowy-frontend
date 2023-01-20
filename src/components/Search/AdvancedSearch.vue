@@ -85,6 +85,16 @@ function onResultSelected(place: Place) {
   emit("changeView", [place.latitude, place.longitude]);
 }
 
+function setToLocation() {
+  if (store.myLocation) {
+    startResults.value = null;
+    showStartResults.value = false;
+    searchQuery.value = "Moja lokalizacja";
+    options.value.searchCenterLat = store.myLocation[0];
+    options.value.searchCenterLng = store.myLocation[1];
+  }
+}
+
 onMounted(() => {
   if (store.advancedSearchOptions) {
     options.value = store.advancedSearchOptions;
@@ -114,6 +124,13 @@ onUnmounted(() => {
         v-model="searchQuery"
         @input="onStartChange"
       />
+      <button
+        id="locationButton"
+        @click="setToLocation"
+        v-if="store.myLocation"
+      >
+        <i class="fa-solid fa-location-crosshairs"></i>
+      </button>
     </div>
     <form @submit.prevent="onSearch">
       <div class="input-group">
@@ -259,5 +276,10 @@ select {
 #searchResults .search-result {
   margin-bottom: 10px;
   border-bottom: 1px solid rgba(150, 150, 150, 0.5);
+}
+
+#locationButton {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
 }
 </style>

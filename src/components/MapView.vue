@@ -219,8 +219,8 @@ function onModeChange() {
     const bounds = map.getBounds();
     Api.getPlacesByBounds((places) => {
       store.loadedPlaces = places;
+      drawMarkers();
       if (places.length) {
-        drawMarkers();
         fitToMarkers();
         // map.fitBounds(markersGroup.getBounds(), { paddingTopLeft: [400, 0] });
       }
@@ -285,6 +285,10 @@ function changeView(center: [number, number], zoom: number = 17) {
   // map.panInside(center, { paddingTopLeft: [450, 100] });
   map.flyTo(center, zoom);
   onBoundsChange();
+}
+
+function moveToLocation() {
+  if (store.myLocation) changeView(store.myLocation);
 }
 
 // const startFromGeoLocation = (stop: [number, number]) => {
@@ -354,6 +358,13 @@ onMounted(() => {
     >
       Zakończ
     </button>
+    <button
+      id="locationButton"
+      @click="moveToLocation()"
+      v-if="store.myLocation"
+    >
+      <i class="fa-solid fa-location-crosshairs" />
+    </button>
   </div>
 </template>
 <style scoped>
@@ -368,5 +379,21 @@ onMounted(() => {
   top: 30px;
   font-size: 1.5rem;
   z-index: 3000;
+}
+
+#locationButton {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 3000;
+  height: 50px;
+  width: 50px;
+  border: none;
+  border-radius: 9999px;
+  font-size: 1.6rem;
+  line-height: 50px;
+  background-color: #ffffff;
+  box-shadow: var(--default-shadow);
+  cursor: pointer;
 }
 </style>

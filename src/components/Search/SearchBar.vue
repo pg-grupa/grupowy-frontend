@@ -172,6 +172,7 @@ button {
   line-height: 50px;
   background-color: #ffffff;
   box-shadow: var(--default-shadow);
+  cursor: pointer;
 }
 
 button.toggled {
