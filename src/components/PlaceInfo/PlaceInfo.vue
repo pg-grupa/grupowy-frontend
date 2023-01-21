@@ -36,19 +36,25 @@ const dayNames: { [key: string]: string } = {
   Saturday: "Sobota",
   Sunday: "Niedziela",
 };
+
+const priceSuffix: { [key: string]: string } = {
+  ONCE: "",
+  PER_HOUR: "/h",
+  MONTHLY: "/miesiąc",
+};
 </script>
 
 <template>
-  <div id="placeInfo">
+  <div id="placeInfo" class="container flex-col">
     <a class="close-button" @click="onCloseButton()">
       <i class="fa-solid fa-x" />
     </a>
     <h1>{{ store.selectedPlace!.name }}</h1>
-    <div class="place-options">
-      <button @click="navigate()">
+    <div class="place-options flex-row">
+      <button @click="navigate()" class="icon-button">
         <i class="fa-solid fa-route" />Nawiguj
       </button>
-      <button @click="toggleReportBox()">
+      <button @click="toggleReportBox()" class="icon-button">
         <i class="fa-solid fa-triangle-exclamation" />Zgłoś
       </button>
     </div>
@@ -71,29 +77,31 @@ const dayNames: { [key: string]: string } = {
     </div>
     <div class="info-item">
       <h5 class="info-label">Godziny otwarcia</h5>
-      <table>
-        <template
-          v-for="openHours, day in store.selectedPlace!.openHours"
-          :key="day"
-        >
-          <tr v-if="openHours">
-            <td>{{ dayNames[day] }}</td>
-            <td>{{ openHours.from }} - {{ openHours.to }}</td>
-          </tr>
-        </template>
-      </table>
+      <template
+        v-for="openHours, day in store.selectedPlace!.openHours"
+        :key="day"
+      >
+        <div class="flex-row space-between" v-if="openHours">
+          <div>{{ dayNames[day] }}</div>
+          <div class="time">
+            {{ openHours.from.substring(0, 5) }} -
+            {{ openHours.to.substring(0, 5) }}
+          </div>
+        </div>
+      </template>
     </div>
     <div class="info-item">
       <h5 class="info-label">Usługi</h5>
-      <table>
-        <tr
-          v-for="services in store.selectedPlace!.services"
-          :key="services.name"
-        >
-          <td>{{ services.name }}</td>
-          <td>{{ services.price }}</td>
-        </tr>
-      </table>
+      <div
+        class="flex-row space-between"
+        v-for="service in store.selectedPlace!.services"
+        :key="service.name"
+      >
+        <div>{{ service.name }}</div>
+        <div class="price">
+          {{ service.price }} zł{{ priceSuffix[service.priceType] }}
+        </div>
+      </div>
     </div>
   </div>
   <report-box
@@ -105,21 +113,17 @@ const dayNames: { [key: string]: string } = {
 
 <style scoped>
 #placeInfo {
-  display: flex;
-  flex-direction: column;
   position: fixed;
   width: 500px;
   left: 50px;
   top: 150px;
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: var(--default-shadow);
   z-index: 1000;
-  padding: 10px 20px;
+  letter-spacing: 0.05em;
 }
 
 h1 {
-  font-size: 1.5rem;
+  font-size: 28px;
+  margin-bottom: 10px;
 }
 
 .close-button {
@@ -136,8 +140,8 @@ h1 {
 
 hr {
   border: none;
-  border-bottom: 1px solid gray;
-  margin: 10px 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+  margin: 15px 0;
 }
 
 .info-item {
@@ -153,11 +157,8 @@ h5 {
   color: rgb(100, 100, 100);
 }
 
-table {
-  width: 100%;
-}
-
-td {
-  line-height: 1.3rem;
+.price,
+.time {
+  width: 170px;
 }
 </style>

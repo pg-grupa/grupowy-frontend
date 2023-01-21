@@ -83,13 +83,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="navSetup">
+  <div id="navSetup" class="flex-col container">
     <a class="close-button" @click="onCloseButton()">
       <i class="fa-solid fa-x" />
     </a>
     <h3>Nawiguj do obiektu</h3>
     <div class="input-group">
-      <i class="fa-solid fa-location-dot" />
+      <div class="input-icon">
+        <i class="fa-solid fa-location-dot" />
+      </div>
       <input
         type="text"
         placeholder="Adres początkowy"
@@ -105,7 +107,9 @@ onMounted(() => {
       </button>
     </div>
     <div class="input-group">
-      <i class="fa-solid fa-flag-checkered" />
+      <div class="input-icon">
+        <i class="fa-solid fa-flag-checkered" />
+      </div>
       <input
         type="text"
         placeholder="Adres końcowy"
@@ -113,8 +117,8 @@ onMounted(() => {
         disabled
       />
     </div>
-    <div class="nav-footer">
-      <button @click="startNavigation">
+    <div class="nav-footer flex-row">
+      <button @click="startNavigation" class="icon-button">
         <i class="fa-solid fa-route" />Nawiguj
       </button>
     </div>
@@ -140,17 +144,11 @@ onMounted(() => {
 
 <style scoped>
 #navSetup {
-  display: flex;
-  flex-direction: column;
   position: fixed;
   width: 400px;
   left: 50px;
   top: 50px;
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: var(--default-shadow);
   z-index: 1000;
-  padding: 10px 20px;
 }
 
 .close-button {
@@ -166,33 +164,8 @@ h3 {
   margin-bottom: 20px;
 }
 
-.input-group {
-  display: flex;
-  flex-direction: row;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  align-items: center;
-}
-
-input,
-select {
-  margin-left: 20px;
-  flex-grow: 1;
-  background-color: #f8f8f8;
-  border: none;
-  border-radius: 5px;
-  box-shadow: var(--small-shadow);
-  padding: 0.5rem 0.5rem;
-}
-
 #locationButton {
-  /* padding: 0.1rem 0.5rem; */
-  /* cursor: pointer; */
   margin-left: 0.5rem;
-  /* background-color: #f8f8f8; */
-  /* border: none; */
-  /* border-radius: 5px; */
-  /* box-shadow: var(--small-shadow); */
   font-size: 1.2rem;
 }
 
@@ -217,11 +190,6 @@ select {
 }
 
 .nav-footer {
-  display: flex;
   justify-content: flex-end;
-}
-
-.nav-footer button {
-  font-size: 1.1rem;
 }
 </style>

@@ -7,6 +7,8 @@ import type { Place } from "@/models/Place";
 import { Api } from "@/services/ApiService";
 import L from "leaflet";
 import type AdvancedSearchOptions from "@/interfaces/AdvancedSearchOptions";
+import ListPin from "../Shared/ListPin.vue";
+import { placeService } from "@/services/PlaceService";
 
 const emit = defineEmits<{
   (e: "advancedFilterChanged"): void;
@@ -95,6 +97,10 @@ function setToLocation() {
   }
 }
 
+function getIconName(place: Place): string {
+  return placeService.getTypeById(place.place_type_id)!.icon;
+}
+
 onMounted(() => {
   if (store.advancedSearchOptions) {
     options.value = store.advancedSearchOptions;
@@ -113,11 +119,13 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div id="advancedSearch">
+  <div id="advancedSearch" class="container flex-col">
     <h3>Szukaj obiekty o wybranym typie na zadanym obszarze</h3>
 
     <div class="input-group">
-      <i class="fa-solid fa-map-location" />
+      <div class="input-icon">
+        <i class="fa-solid fa-map-location" />
+      </div>
       <input
         type="text"
         placeholder="Adres początkowy"
@@ -134,7 +142,9 @@ onUnmounted(() => {
     </div>
     <form @submit.prevent="onSearch">
       <div class="input-group">
-        <i class="fa-solid fa-wrench" />
+        <div class="input-icon">
+          <i class="fa-solid fa-wrench" />
+        </div>
         <select v-model="options.serviceType">
           <option
             v-for="placeType in store.placeTypes"
@@ -147,24 +157,32 @@ onUnmounted(() => {
         <!-- <input type="text" placeholder="Typ obiektu" /> -->
       </div>
       <div class="input-group">
-        <i class="fa-solid fa-ruler" />
+        <div class="input-icon">
+          <i class="fa-solid fa-ruler" />
+        </div>
         <input
           type="number"
           placeholder="Zasięg (m)"
           v-model="options.searchRadius"
         />
+        <button id="searchButton" @click="onSearch">
+          <i class="fa-solid fa-magnifying-glass" />
+        </button>
       </div>
     </form>
     <div id="searchResults" v-if="showResults">
       <template v-if="searchResults && searchResults.length">
         <a
-          class="search-result"
+          class="search-result flex-row"
           v-for="result in searchResults"
           :key="result.name"
           @click="onResultSelected(result)"
         >
-          <h4>{{ result.name }}</h4>
-          <h5>{{ result.address }}</h5>
+          <list-pin :fa-class="getIconName(result)"></list-pin>
+          <div>
+            <h4>{{ result.name }}</h4>
+            <h5>{{ result.address }}</h5>
+          </div>
         </a>
       </template>
       <template v-else>
@@ -173,7 +191,11 @@ onUnmounted(() => {
     </div>
   </div>
 
-  <div id="startSearchResults" v-if="showStartResults">
+  <div
+    id="startSearchResults"
+    class="container flex-col"
+    v-if="showStartResults"
+  >
     <template v-if="startResults && startResults.length">
       <a
         class="search-result"
@@ -198,42 +220,15 @@ onUnmounted(() => {
   height: calc(100vh - 200px);
   left: 50px;
   top: 150px;
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: var(--default-shadow);
   z-index: 1000;
-  padding: 20px;
+  padding-top: 20px;
 }
 
 h3 {
   text-align: center;
   margin-bottom: 20px;
-}
-
-/* form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border-bottom: 1px solid #c2c2c2;
-} */
-
-.input-group {
-  display: flex;
-  flex-direction: row;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  align-items: center;
-}
-
-input,
-select {
-  margin-left: 20px;
-  flex-grow: 1;
-  background-color: #f8f8f8;
-  border: none;
-  border-radius: 5px;
-  box-shadow: var(--small-shadow);
-  padding: 0.5rem 0.5rem;
+  font-size: 16px;
+  line-height: 19px;
 }
 
 #startSearchResults {
@@ -243,17 +238,12 @@ select {
   top: 280px;
   max-height: 500px;
   overflow-y: auto;
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: var(--default-shadow);
   z-index: 2000;
-  padding: 20px 0;
 }
 
 .search-result {
-  display: block;
   cursor: pointer;
-  padding: 5px 20px;
+  padding: 5px 0 10px;
 }
 
 .search-result:hover {
@@ -278,7 +268,8 @@ select {
   border-bottom: 1px solid rgba(150, 150, 150, 0.5);
 }
 
-#locationButton {
+#locationButton,
+#searchButton {
   margin-left: 0.5rem;
   font-size: 1.2rem;
 }
