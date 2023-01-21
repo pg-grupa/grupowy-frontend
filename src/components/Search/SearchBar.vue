@@ -173,6 +173,7 @@ button {
   background-color: #ffffff;
   box-shadow: var(--default-shadow);
   cursor: pointer;
+  padding: 0;
 }
 
 button.toggled {

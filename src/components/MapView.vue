@@ -20,7 +20,10 @@ let myLocationMarker: Marker | undefined;
 let routeStartMarker: Marker | undefined;
 let routeEndMarker: Marker | undefined;
 let routingControl: any = null;
+
 const mapContainer = ref();
+const permLabels = ref(false);
+
 let fitting = false;
 
 function clearMarkers() {
@@ -141,6 +144,7 @@ function drawMarkers() {
     const marker = L.marker([place.latitude, place.longitude], { icon: icon });
     marker.bindTooltip(place.name, {
       offset: [15, -22.5],
+      permanent: permLabels.value,
     });
     marker.addTo(markersGroup);
     marker.on("click", () => {
@@ -291,6 +295,11 @@ function moveToLocation() {
   if (store.myLocation) changeView(store.myLocation);
 }
 
+function toggleLabels() {
+  permLabels.value = !permLabels.value;
+  redrawMarkers();
+}
+
 // const startFromGeoLocation = (stop: [number, number]) => {
 //   navigator.geolocation.getCurrentPosition((position) => {
 //     const start: [number, number] = [
@@ -365,6 +374,13 @@ onMounted(() => {
     >
       <i class="fa-solid fa-location-crosshairs" />
     </button>
+    <button
+      id="labelButton"
+      @click="toggleLabels()"
+      :class="{ toggled: permLabels }"
+    >
+      <i class="fa-solid fa-tag"></i>
+    </button>
   </div>
 </template>
 <style scoped>
@@ -383,6 +399,23 @@ onMounted(() => {
 
 #locationButton {
   position: fixed;
+  right: 100px;
+  bottom: 30px;
+  z-index: 3000;
+  height: 50px;
+  width: 50px;
+  border: none;
+  border-radius: 9999px;
+  font-size: 1.6rem;
+  line-height: 50px;
+  background-color: #ffffff;
+  box-shadow: var(--default-shadow);
+  cursor: pointer;
+  padding: 0;
+}
+
+#labelButton {
+  position: fixed;
   right: 30px;
   bottom: 30px;
   z-index: 3000;
@@ -395,5 +428,11 @@ onMounted(() => {
   background-color: #ffffff;
   box-shadow: var(--default-shadow);
   cursor: pointer;
+  padding: 0;
+}
+
+#labelButton.toggled {
+  background-color: #3a3a3a;
+  color: #ffffff;
 }
 </style>
